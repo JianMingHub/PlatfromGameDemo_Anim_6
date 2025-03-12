@@ -89,6 +89,7 @@ namespace UDEV.PlatfromGame
                 GameManager.Ins.SetMapSpeed(0f);
             }
             ActionHandle();
+            Debug.Log(m_fsm.State);
         }
         private void FixedUpdate()
         {
@@ -415,7 +416,7 @@ namespace UDEV.PlatfromGame
             private void Jump_Update() { 
                 m_rb.isKinematic = false;
                 // Nếu vận tốc rơi xuống (velocity.y < 0) và không chạm đất (!obstacleChker.IsOnGround), => sang trạng thái OnAir.
-                if (m_rb.velocity.y < 0 && !obstacleChker.IsOnGround)
+                if (m_rb.velocity.y < 0 && !obstacleChker.IsOnGround || CameraFollow.ins.IsHozStuck)
                 {
                     ChangeState(PlayerAnimState.OnAir);
                 }
